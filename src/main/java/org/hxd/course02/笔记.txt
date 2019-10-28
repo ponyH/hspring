@@ -1,5 +1,5 @@
 1、IOC(控制反转)
-    自己new，编程了从IOC容器中获取，就是控制反转。从new、setXXX()，变成了从Spring容器中get
+    自己new，变成了从IOC容器中获取，就是控制反转。从new、setXXX()，变成了从Spring容器中get
 
 2、DI(依赖注入)
     为了更加清晰的理解控制反转，IOC在一次大会上更名为DI，叫依赖注入。将属性值注入给属性，将属性赋值注入给bean，
@@ -8,4 +8,4 @@
 3、IOC和DI本质上是一回事
 
 4、ICO分为两步
-    先给SpringIOC中存放对象并赋值，然后从IOC容器中拿
+    先给SpringIOC中存放对象并为对象的属性赋值，然后从IOC容器中拿对象
