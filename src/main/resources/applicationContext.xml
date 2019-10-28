@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="student" class="org.hxd.course01.entity.Student">
+        <property name="stuId" value="1001"/>
+        <property name="stuName" value="二狗"/>
+        <property name="sex" value="男"/>
+    </bean>
+
+    <bean id="javaCourse" class="org.hxd.course02.common.JavaCourse"></bean>
+    <bean id="pythonCourse" class="org.hxd.course02.common.PythonCourse"></bean>
+</beans>

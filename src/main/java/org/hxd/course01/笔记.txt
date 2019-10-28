@@ -1,0 +1,13 @@
+1、最简单的Spring程序编写，需要依赖6个依赖
+    core、beans、context、expression、aop、commons-logging
+
+2、Spring配置文件中的bean标签初识
+    有id属性和class属性，id是唯一标识，class指向类的全限定名
+
+3、bean存放在IOC容器中
+    从IOC容器中获取对象，使用getBean(String name)方法
+
+4、bean标签的意义
+    1、配置一个bean，并为其属性赋值
+    2、对象的创建和属性的赋值，都由Spring完成
+    3、<bean>标签，其实就相当于Student student = new Student();
