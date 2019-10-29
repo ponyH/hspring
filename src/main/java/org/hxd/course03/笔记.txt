@@ -1,21 +1,33 @@
 1、DI的三种方式
-    依赖，一个类依赖另一个类，这就叫依赖
+    依赖，比如一个类Course中，定义了另一个Teacher类型的变量teacher作为属性，这种类与类之间的关系，就是依赖
 
 2、DI的白话解释
-    1、IOC容器赋值：如果是简单类型，使用property标签的value，如果是对象类型，使用property标签的ref，
-        因此实现了对象与对象之间的关系，这就是依赖注入
-    2、依赖注入的底层实现原理是反射
+    1、IOC容器赋值：如果是简单类型(String+8中基本类型)，使用property标签的value，
+        如果是对象类型，使用property标签的ref，因此实现了对象与对象之间的关系，这就是依赖注入
+    2、依赖注入的底层实现原理是反射(圈起来，要考的)
 
 3、依赖注入的三种方式
     1、set注入，通过set方法赋值
     2、构造器注入，通过构造器赋值
     3、p命名空间注入
 
-4、注入时property标签的value属性疑惑
+4、注入时property标签的value属性思考
     问题：value=""，表面看起来为属性注入的值都是String，但其实并非如此，试想一下，如果Teacher类中有两个构造器，一个的
          参数是int age，一个的参数是String name，那么在applicationContext.xml中使用构造注入的方式，
          <constructor-arg value="33">到底是给谁赋值？
-    答案：无论是String还是int/short/long，此时，需要使用name/type进行区分
+    答案：无论是String还是int/short/long，都是使用value=""方式赋值，最好使用property标签的
+         name/type属性进行区分，避免产生歧义或者错误
 
 5、注入复杂数据类型
-    1、
+    1、为List类型属性注入值
+        使用property标签+子标签list+子标签value，一个list标签多个value标签
+    2、为Set类型属性注入值
+        使用property标签+子标签+value标签，一个set标签多个value标签
+    3、为Map类型属性注入值
+        使用property标签+map标签+entry标签，entry标签的key对应map的key，entry标签的value对应map的value
+        可以出现多个entry标签
+    4、为Properties类型的属性注入值
+        使用property标签+props标签+prop标签，prop标签的key就是properties的key，prop标签和prop结束标签之间
+        的值就是properties的值
+    5、为array类型的属性注入值
+        使用properties标签+list标签，用法与注入list相同，不再赘述
