@@ -1,14 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--第一节Spring初试-->
     <bean id="student" class="org.hxd.course01.entity.Student">
         <property name="stuId" value="1001"/>
         <property name="stuName" value="二狗"/>
         <property name="sex" value="男"/>
     </bean>
 
+    <!--第二节IOC知识-->
     <bean id="javaCourse" class="org.hxd.course02.common.JavaCourse"></bean>
     <bean id="pythonCourse" class="org.hxd.course02.common.PythonCourse"></bean>
+
+    <!--第三节bean，课程依赖于teacher，set注入-->
+    <!--<bean id="teacher" class="org.hxd.course03.Teacher">-->
+        <!--<property name="name" value="狗蛋"/>-->
+        <!--<property name="age" value="18"/>-->
+    <!--</bean>-->
+    <!--<bean id="course" class="org.hxd.course03.Course">-->
+        <!--<property name="courseName" value="javaWeb"/>-->
+        <!--<property name="courseHour" value="8"/>-->
+        <!--&lt;!&ndash;把老师的值注入进去了，其实就是调用了set方法，可以在set方法上debug&ndash;&gt;-->
+        <!--<property name="teacher" ref="teacher"/>-->
+    <!--</bean>-->
+
+    <!--构造注入-->
+    <!--<bean id="teacher" class="org.hxd.course03.Teacher">-->
+        <!--<constructor-arg name="name" value="狗剩"/>-->
+        <!--<constructor-arg name="age" value="18"/>-->
+    <!--</bean>-->
+    <!--<bean id="course" class="org.hxd.course03.Course">-->
+        <!--&lt;!&ndash;可以通过index属性，指定属性与这里的顺序，不指定index时，下方的内容必须与构造方法的属性顺序严格一致&ndash;&gt;-->
+        <!--<constructor-arg name="courseName" value="html"/>-->
+        <!--<constructor-arg name="courseHour" value="4"/>-->
+        <!--<constructor-arg name="teacher" ref="teacher"/>-->
+        <!--&lt;!&ndash;还可以根据属性的类型type来写，也可以解决构造方法的参数顺序与此处标签顺序不一致的情况&ndash;&gt;-->
+    <!--</bean>-->
+
+    <!--p命名空间注入，此种方式，属性的顺序没有强制要求-->
+    <bean id="teacher" class="org.hxd.course03.Teacher" p:name="狗蛋" p:age="25"/>
+    <bean id="course" class="org.hxd.course03.Course" p:courseName="C" p:courseHour="8" p:teacher-ref="teacher"/>
+    <bean id="iocCollection" class="org.hxd.course03.IOCCollection">
+        <!--为List类型的属性注入-->
+        <property name="list">
+            <list>
+                <value>java</value>
+                <value>html</value>
+                <value>javascript</value>
+            </list>
+        </property>
+
+        <!--为Set类型的属性注入-->
+        <property name="set">
+            <set>
+                <value>唱</value>
+                <value>跳</value>
+                <value>rap</value>
+                <value>篮球</value>
+                <!--此处注入一个重复的value，将被去除-->
+                <value>篮球</value>
+            </set>
+        </property>
+
+        <!--为Map类型的属性注入-->
+        <property name="map">
+            <map>
+                <entry key="key1" value="篮球"/>
+                <entry key="key2" value="篮球"/>
+                <entry key="key3" value="足球"/>
+                <entry key="key4" value="网球"/>
+            </map>
+        </property>
+
+        <!--为Properties类型的属性注入-->
+        <property name="prop">
+            <props>
+                <prop key="prop1">辣条</prop>
+                <prop key="prop2">可乐</prop>
+                <prop key="prop3">泡面</prop>
+                <prop key="prop4">白开水</prop>
+            </props>
+        </property>
+
+        <!--为数组类型的属性注入，使用list或者set标签都可以，具体看是否有去重的需求-->
+        <property name="strs">
+            <list>
+                <value>狗蛋</value>
+                <value>狗剩</value>
+                <value>翠花</value>
+                <value>小黑</value>
+            </list>
+        </property>
+    </bean>
 </beans>

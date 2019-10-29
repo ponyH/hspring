@@ -1,0 +1,21 @@
+1、DI的三种方式
+    依赖，一个类依赖另一个类，这就叫依赖
+
+2、DI的白话解释
+    1、IOC容器赋值：如果是简单类型，使用property标签的value，如果是对象类型，使用property标签的ref，
+        因此实现了对象与对象之间的关系，这就是依赖注入
+    2、依赖注入的底层实现原理是反射
+
+3、依赖注入的三种方式
+    1、set注入，通过set方法赋值
+    2、构造器注入，通过构造器赋值
+    3、p命名空间注入
+
+4、注入时property标签的value属性疑惑
+    问题：value=""，表面看起来为属性注入的值都是String，但其实并非如此，试想一下，如果Teacher类中有两个构造器，一个的
+         参数是int age，一个的参数是String name，那么在applicationContext.xml中使用构造注入的方式，
+         <constructor-arg value="33">到底是给谁赋值？
+    答案：无论是String还是int/short/long，此时，需要使用name/type进行区分
+
+5、注入复杂数据类型
+    1、
