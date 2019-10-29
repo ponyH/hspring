@@ -1,5 +1,6 @@
 1、DI的理解
-    依赖，比如一个类Course中，定义了另一个Teacher类型的变量teacher作为属性，这种类与类之间的关系，就是依赖
+    依赖：Course类中有一个Teacher类型的属性，我们说Course依赖Teacher
+    注入：在配置spring的bean时，为Course中的teacher属性注入值，这就是注入
 
 2、DI的白话解释
     1、IOC容器赋值：如果是简单类型(String+8中基本类型)，使用property标签的value，
