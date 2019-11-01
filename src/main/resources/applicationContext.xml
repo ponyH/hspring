@@ -139,12 +139,12 @@
 
     <!--配置事务管理器-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="datasource"></property>
+        <property name="dataSource" ref="datasource"/>
     </bean>
 
     <!--增加对事务的支持-->
-    <tx:annotation-driven />
+    <tx:annotation-driven/>
 
     <!--注解式aop配置-->
-    <aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true" />
+    <aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true"/>
 </beans>
