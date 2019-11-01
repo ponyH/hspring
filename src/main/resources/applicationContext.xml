@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--第一节Spring初试-->
     <bean id="student" class="org.hxd.course01.entity.Student">
@@ -40,8 +42,16 @@
     <!--</bean>-->
 
     <!--p命名空间注入，此种方式，属性的顺序没有强制要求-->
-    <bean id="teacher" class="org.hxd.course03.Teacher" p:name="狗蛋" p:age="25"/>
-    <bean id="course" class="org.hxd.course03.Course" p:courseName="C" p:courseHour="8" p:teacher-ref="teacher"/>
+    <!--<bean id="teacher" class="org.hxd.course03.Teacher" p:name="狗蛋" p:age="25"/>-->
+    <!--<bean id="teacher" class="org.hxd.course03.Teacher">-->
+        <!--<property name="name">-->
+            <!--<value type="java.lang.String"><![CDATA[这里可以放特殊符号]]></value>-->
+        <!--</property>-->
+        <!--<property name="age">-->
+            <!--<value type="java.lang.Integer">5</value>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--<bean id="course" class="org.hxd.course03.Course" p:courseName="C" p:courseHour="8" p:teacher-ref="teacher"/>-->
     <bean id="iocCollection" class="org.hxd.course03.IOCCollection">
         <!--为List类型的属性注入-->
         <property name="list">
@@ -94,4 +104,47 @@
             </list>
         </property>
     </bean>
+
+    <!--第四节：使用构造注入为集合类型的属性赋值-->
+    <bean id="iocc" class="org.hxd.course03.IOCCollection">
+        <constructor-arg name="list">
+            <list>
+                <value>哈哈</value>
+                <value>嘻嘻</value>
+                <value>嘿嘿</value>
+                <value>呵呵</value>
+            </list>
+        </constructor-arg>
+        <!--自动装配-->
+    </bean>
+
+    <!--byName形式的自动注入-->
+    <bean id="teacher" class="org.hxd.course03.Teacher" p:name="古月" p:age="11"/>
+    <bean id="course" class="org.hxd.course03.Course" autowire="byName" p:courseName="java" p:courseHour="8"/>
+
+    <!--byType形式的自动注入-->
+    <!--constructor形式的自动注入-->
+
+    <!--扫描注解-->
+    <context:component-scan base-package="org.hxd.*"/>
+
+    <!--第五节：Spring声明式事务的使用-->
+    <!--配置数据库相关-事务-->
+    <bean id="datasource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/0419"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="datasource"></property>
+    </bean>
+
+    <!--增加对事务的支持-->
+    <tx:annotation-driven />
+
+    <!--注解式aop配置-->
+    <aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true" />
 </beans>

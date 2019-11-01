@@ -60,4 +60,12 @@ public class IOCCollection {
                 ", strs=" + Arrays.toString(strs) +
                 '}';
     }
+
+    public IOCCollection() {
+
+    }
+
+    public IOCCollection(List<String> list) {
+        this.list = list;
+    }
 }

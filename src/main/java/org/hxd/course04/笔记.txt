@@ -1,0 +1,36 @@
+1、property标签的特殊说明(constructor标签与此相同，也可以拆分constructor标签+value子标签)
+    1、当property标签使用name和value为属性赋值时，value必须带双引号
+    2、当property标签使用name属性和<value>子标签时，value不必带双引号
+    3、<value>字标签有type属性
+
+2、处理空值(为属性赋值一个null，或者"")
+    1、property标签+<null/>子标签(这个是要注意的)
+    2、value属性=""就代表空字符串，<value></value>
+    3、value子标签中什么都不写，就是空字符串，value=""
+
+3、通过构造器的方式为集合类型赋值
+    与set注入的方式一样
+
+4、自动装配(byName)
+    1、只适用于引用类型，对简单类型无效
+    2、给bean加autoWired属性，会自动寻找其他的bean的id=该bean的属性名
+    3、byName本质是根据bean的id属性来匹配的，所以本质上其实是byId
+
+5、自动装配(byType)
+    1、其他bean的类型，是否与该Course类的ref属性的类型一致，若一致则匹配
+    2、若同一个类型的bean有两个，仅id不同，最好不要让这种情况出现
+
+6、可以在xml的命名空间中加入default-autowired="byName/byType"，不推荐使用
+
+7、注解方式定义bean(一定要掌握)
+    1、定义bean，并将bean的相应的属性值，放入IOC容器
+    2、<context:component-scan base-package="org.hxd.*"/>开启注解扫描
+    3、扫描带有注解的类，并将其纳入Spring的IOC容器
+    4、@Repository的作用就相当于<bean id="studentDao" class="org.hxd.course04.StudentDao">
+
+8、常用的注解及分层
+    1、@Component、@Controller、@Service、@Repository
+    2、@Component虽然万能，但是不够明确，一般在一个bean不好归类的时候，才使用这个注解
+    3、@Controller对应控制层
+       @Service对应业务逻辑层
+       @Repository对应数据库操作层dao
